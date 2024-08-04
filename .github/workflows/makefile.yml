@@ -14,4 +14,4 @@ jobs:
       with:
         xcode-version: '13.4.1'
     - name: make
-      run: make all
+      run: make
