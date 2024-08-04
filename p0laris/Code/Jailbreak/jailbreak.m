@@ -1131,7 +1131,7 @@ bool post_jailbreak(void) {
 	 *  doubleH3lix
 	 */
 	progress_ui("Arreglando CYDO");
- 	run_cmd("chmod +s /usr/libexec/cydia/*");
+ 	run_cmd("chmod 06555 /usr/libexec/cydia/cydo");
 	progress_ui("fixing springboard");
 	NSMutableDictionary *md = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.apple.springboard.plist"];
 	
