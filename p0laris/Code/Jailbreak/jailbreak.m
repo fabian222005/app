@@ -1105,8 +1105,11 @@ bool post_jailbreak(void) {
 	char* nmr = strdup("/dev/disk0s1s1");
 	int mntr = mount("hfs", "/", 0x10000, &nmr);
 	lprintf("mount(...); = %d\n", mntr);
-	
-#if !FIRST_TIME_OVERRIDE
+	//REINSTALL
+	progress_ui("extracting bootstrap");
+	extract_bootstrap();
+	need_uicache = true;	
+/*#if !FIRST_TIME_OVERRIDE
 	if (!exists("/.p0laris") && !exists("/.installed_home_depot")) {
 #endif
 		progress_ui("extracting bootstrap");
@@ -1114,7 +1117,7 @@ bool post_jailbreak(void) {
 		need_uicache = true;
 #if !FIRST_TIME_OVERRIDE
 	}
-#endif
+#endif*/
 	
 #if INSTALL_UNTETHER
 	if (!exists("/untether/p0laris")) {
@@ -1130,8 +1133,8 @@ bool post_jailbreak(void) {
 	/*
 	 *  doubleH3lix
 	 */
-	progress_ui("Arreglando CYDO");
- 	chmod("/usr/libexec/cydia/cydo",06555);
+	/*progress_ui("Arreglando CYDO");
+ 	chmod("/usr/libexec/cydia/cydo",06555);*/
 	progress_ui("fixing springboard");
 	NSMutableDictionary *md = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.apple.springboard.plist"];
 	
