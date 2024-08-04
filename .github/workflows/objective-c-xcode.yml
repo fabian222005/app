@@ -26,7 +26,11 @@ jobs:
         env:
           scheme: ${{ 'default' }}
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
+          xcodebuild clean build -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+	        mkdir build/Debug-iphoneos/Payload
+          mv build/Debug-iphoneos/p0laris.app build/Debug-iphoneos/Payload/p0laris.app
+	        cd build/Debug-iphoneos/; zip -r p0laris-Debug.ipa Payload; mv p0laris*.ipa ../../
+          xcodebuild clean build -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          mkdir build/Release-iphoneos/Payload
+          mv build/Release-iphoneos/p0laris.app build/Release-iphoneos/Payload/p0laris.app
+          cd build/Release-iphoneos/; zip -r p0laris-Release.ipa Payload; mv p0laris*.ipa ../../
