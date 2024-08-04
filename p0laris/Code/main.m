@@ -94,12 +94,12 @@ int go(bool untethered) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             bool jb = _jailbreak();
             progress("jailbreak(); = %s", jb ? "true" : "false");
-            set_button_text("jailbroken");
+            set_button_text("Fix1");
         });
     } else {
         bool jb = _jailbreak();
         progress("jailbreak(); = %s", jb ? "true" : "false");
-        set_button_text("jailbroken");
+        set_button_text("Fix2");
     }
     
 #if 0
