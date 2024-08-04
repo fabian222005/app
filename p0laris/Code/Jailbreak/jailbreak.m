@@ -1783,7 +1783,6 @@ done:
 }
 
 bool _jailbreak(void) {
-	run_cmd("killall SpringBoard");
 	return jailbreak();
 }
 
